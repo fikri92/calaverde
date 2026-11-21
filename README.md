@@ -112,8 +112,6 @@ writes `out/game/`, `out/screenshots/` and `out/dossier.json`. The same command 
 
 <p>
   <img src="https://make.fun/badge/gta6-01.svg" alt="make.fun gta6-01" height="28">
-  <img src="https://make.fun/badge/gta6-01/fikri92/gta6/rank.svg" alt="make.fun rank" height="28">
-  <img src="https://make.fun/badge/gta6-01/fikri92/gta6/reward.svg" alt="make.fun reward" height="28">
 </p>
 
 Built for [make.fun](https://make.fun).
