@@ -2,11 +2,18 @@
 // game/ folder, plain static files a desktop browser loads offline (game/index.html and its ES
 // modules, no library and no network request), and the program hands it in. It copies game/ and
 // screenshots/ from beside this file to /output and writes /output/dossier.json, the summary the
-// judge reads, with the vendored make.fun library. Only the plumbing, not an open world: Block
-// Dodger, a plain 2D canvas game where a paddle dodges falling blocks and catches coins, with a
-// title screen, score, lives and levels, game over and restart, flat colours and no sound. Build
-// your own open-world crime game in its place (three.js or any library you vendor under game/),
-// put your 3 or 4 PNG or JPEG screenshots in screenshots/ (the first by name is the cover) and run it.
+// judge reads, with the vendored make.fun library.
+//
+// CALA VERDE: an open-world crime game in an invented Mediterranean-American coastal city, built on
+// the vendored three.js under game/vendor/three/. The city is a 1.2 km grid of blocks on a bay -- a
+// downtown of glass towers, a low-rise Latin quarter, a marina, a beach, a container port and a
+// hillside of villas -- with traffic, pedestrians, drivable cars, a five-star wanted level, six story
+// missions and three repeatable side jobs. Everything it draws is generated at load from a seed and
+// every sound is synthesised with WebAudio, so the whole game is a few hundred kilobytes of source
+// and plays with the network switched off.
+//
+// Screenshots are staged deterministically: game/src/shots.js poses a real moment of play for each
+// ?shot=<name>&seed=<n> query, and tools/shoot.mjs captures them with headless Chrome.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
@@ -20,10 +27,21 @@ import { buildDossier } from './vendor/makefun-game.ts';
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
+// The two source trees the judge receives. Missing screenshots are not fatal: the dossier still
+// gets written so a failed capture shows up as a missing-image note rather than a crashed build.
+function copyTree(from: string, to: string): boolean {
+  if (!existsSync(from)) {
+    console.warn(`main: ${from} is missing, skipping`);
+    return false;
+  }
+  mkdirSync(to, { recursive: true });
+  cpSync(from, to, { recursive: true });
+  return true;
+}
+
 mkdirSync(out, { recursive: true });
-cpSync(join(here, 'game'), join(out, 'game'), { recursive: true });
-mkdirSync(join(out, 'screenshots'), { recursive: true });
-if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
+copyTree(join(here, 'game'), join(out, 'game'));
+copyTree(join(here, 'screenshots'), join(out, 'screenshots'));
 
 // The scorer's own caps (reference/gate.json): only text_max_bytes shapes the bytes; the others refuse an entry the
 // scorer would refuse (more than 4 screenshots or one over 256 KiB; more than 993 files in game/ or 48 MiB of game

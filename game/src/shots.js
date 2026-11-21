@@ -44,13 +44,20 @@ function placeCar(g, car, x, z, heading, speed = 0) {
 }
 
 // Walkers on both kerbs of the avenue, idling and turned toward the street so the shot shows
-// faces and colours rather than a row of backs.
-function stageCrowd(g, { x, z, count = 8, spread = 46, near = 6 }) {
+// faces and colours rather than a row of backs. `kerbNear` and `kerbFar` are offsets from the given
+// centreline: passing them explicitly avoids staging a whole pavement on the camera's own axis,
+// where every walker projects behind the player and the street still looks deserted.
+function stageCrowd(g, { x, z, count = 8, spread = 46, near = 6, kerbNear = null, kerbFar = null }) {
   const layout = g.layout;
   const half = layout.driveHalf + (layout.walkWidth ?? 6) * 0.55;
+  const nearOff = kerbNear ?? -half;
+  const farOff = kerbFar ?? half;
   for (let i = 0; i < count; i++) {
     const side = i % 2 === 0 ? -1 : 1;
-    const px = x + side * half;
+    const base = side < 0 ? nearOff : farOff;
+    // Fan the walkers along their own kerb instead of marching them in one line.
+    const lane = ((i % 3) - 1) * 2.2;
+    const px = x + base + lane;
     // Bands down the avenue starting just ahead of the anchor, close in, so the sidewalk in front of
     // the camera actually has people on it instead of a row of distant dots.
     const pz = z - near - Math.floor(i / 2) * (spread / Math.max(1, count / 2));
@@ -140,8 +147,18 @@ export function stageCover(g) {
   // Traffic beyond the cruiser, in both directions. Anchored on the centreline and starting just a
   // few metres ahead, so cars flank the player at readable size instead of stacking at the horizon.
   stageAvenueTraffic(g, { x: junction.aveX, z: z, count: 11, clearAhead: 6, spacing: 9 });
-  // Walkers on the far kerb and the near one, none of them on top of the player.
-  stageCrowd(g, { x: junction.aveX, z: z - 2, count: 14, spread: 30, near: 4 });
+  // Walkers on the kerb the player is standing on, fanned either side of them so they read at
+  // thumbnail size, plus a second group on the far pavement for depth.
+  stageCrowd(g, { x, z, count: 10, spread: 24, near: 3, kerbNear: 2.4, kerbFar: -2.0 });
+  stageCrowd(g, {
+    x: junction.aveX + layout.driveHalf + 2.0,
+    z,
+    count: 6,
+    spread: 22,
+    near: 5,
+    kerbNear: 1.6,
+    kerbFar: -1.6,
+  });
 
   // A mission genuinely in progress: the objective line, the distance and the marker are all live.
   missions.start('first_ride');
