@@ -101,6 +101,36 @@ tools/shoot.mjs             headless Chrome screenshot capture
 tools/verify-build.mjs      gate and screenshot verification
 ```
 
+## Systems in detail
+
+The city is a 1.2 km grid laid out from a single seed, so every playthrough draws the same streets.
+Six districts sit on it: a downtown of glass towers, a low-rise Latin quarter of awnings and murals,
+a marina of yachts and moorings, a beach promenade lined with palms, a container port with stacked
+freight, and a hillside of villas above the bay. Roads come from a lane graph, so traffic keeps to
+its side, stops at red lights, queues behind an obstacle, turns at junctions and honks when the
+player blocks it. Pedestrians walk the sidewalks, cross at crosswalks, idle on benches and phones,
+and scatter when a shot is fired or a car mounts the kerb.
+
+Vehicles use arcade physics with a separate acceleration curve per class: a sedan that understeers,
+a muscle car that breaks traction under throttle, a sports car with a short gear spread, a van that
+wallows, and a police cruiser tuned to close a gap. The handbrake turns any of them into a drift
+with skid marks and tyre smoke, and damage accumulates per panel as the engine note drops.
+
+The wanted level runs from zero to five stars. One star sends a patrol to look; two and three bring
+cruisers that chase and officers who fight on foot; four and five add units and roadblocks. It rises
+only on witnessed crimes and decays once the player breaks line of sight and leaves the search
+radius, which the minimap shows as a cone.
+
+Combat is hitscan with spread, recoil, tracers, impact sparks and decals, over a pistol, an SMG and a
+shotgun, plus a melee punch and health and armour pickups. Six story missions chain a named cast
+through a chase, a delivery, a protection job, a robbery, a betrayal and a finale, with three
+repeatable side jobs on top. Progress saves to localStorage and restores cash, mission index,
+position and wanted level.
+
+Every sound is synthesised at runtime with WebAudio - engine hum and gear changes, tyre squeal,
+gunshots, sirens that pan with distance, footsteps, ocean ambience and an original music loop that
+ducks under dialogue - so the game ships with no audio files at all.
+
 ## Building the entry
 
 ```
