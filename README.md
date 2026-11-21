@@ -1,8 +1,8 @@
 # CALA VERDE
 
 [![make.fun · gta6-01](https://make.fun/badge/gta6-01.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
-[![rank](https://make.fun/badge/gta6-01/fikri92/calaverde/rank.svg)](https://make.fun/bounty/gta6-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
-[![reward](https://make.fun/badge/gta6-01/fikri92/calaverde/reward.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
+[![rank](https://make.fun/badge/gta6-01/fikri92/gta6/rank.svg)](https://make.fun/bounty/gta6-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
+[![reward](https://make.fun/badge/gta6-01/fikri92/gta6/reward.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
 
 A sun-soaked open-world crime game that runs in a desktop browser tab with no build step and no
 network connection. You are Nico Salas, back in your home town on the bay with a debt, a borrowed
@@ -112,6 +112,8 @@ writes `out/game/`, `out/screenshots/` and `out/dossier.json`. The same command 
 
 <p>
   <img src="https://make.fun/badge/gta6-01.svg" alt="make.fun gta6-01" height="28">
+  <img src="https://make.fun/badge/gta6-01/fikri92/gta6/rank.svg" alt="make.fun rank" height="28">
+  <img src="https://make.fun/badge/gta6-01/fikri92/gta6/reward.svg" alt="make.fun reward" height="28">
 </p>
 
 Built for [make.fun](https://make.fun).
