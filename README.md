@@ -1,5 +1,9 @@
 # CALA VERDE
 
+[![make.fun · gta6-01](https://make.fun/badge/gta6-01.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
+[![rank](https://make.fun/badge/gta6-01/fikri92/calaverde/rank.svg)](https://make.fun/bounty/gta6-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
+[![reward](https://make.fun/badge/gta6-01/fikri92/calaverde/reward.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
+
 A sun-soaked open-world crime game that runs in a desktop browser tab with no build step and no
 network connection. You are Nico Salas, back in your home town on the bay with a debt, a borrowed
 pistol and a crew that is not entirely on your side. Cala Verde is an invented Mediterranean-American
