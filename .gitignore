@@ -1,0 +1,3 @@
+# build output: main.ts regenerates it, never commit it
+out/
+node_modules/
